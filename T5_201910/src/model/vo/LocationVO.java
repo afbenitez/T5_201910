@@ -1,6 +1,7 @@
 package model.vo;
+import org.apache.commons.lang3.text.translate.NumericEntityEscaper;
 
-public abstract class LocationVO<T> implements Comparable<T>
+public class LocationVO implements Comparable<LocationVO>
 {
 	private int addressId;
 	private String location;

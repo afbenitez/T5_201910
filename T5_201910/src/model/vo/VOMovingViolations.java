@@ -30,14 +30,14 @@ public class VOMovingViolations implements Comparable<VOMovingViolations>
 	
 	private String violationCode;
 	
-	private String addressID;
+	private int addressID;
 	
 	private int streetID;
 	
 	
 	
 
-	public VOMovingViolations(int pId, String pLocation,int pFineAmt, boolean pAccident, String pTicketIssueDate, double pTotalPaid, String pAccidentIndicator, String pViolationDescription,String pViolationCode, String pAddressID, int pstreetID)
+	public VOMovingViolations(int pId, String pLocation,int pFineAmt, boolean pAccident, String pTicketIssueDate, double pTotalPaid, String pAccidentIndicator, String pViolationDescription,String pViolationCode, int linea, int pstreetID)
 	{
 		objectID=pId;
 		location=pLocation;
@@ -48,7 +48,7 @@ public class VOMovingViolations implements Comparable<VOMovingViolations>
 		accidentIndicator = pAccidentIndicator;
 		violationDescription = pViolationDescription;
 		violationCode = pViolationCode;
-		addressID = pAddressID;
+		addressID = linea;
 		streetID = pstreetID;
 	}
 
@@ -115,7 +115,7 @@ public class VOMovingViolations implements Comparable<VOMovingViolations>
 		return violationCode;
 	}
 	
-	public String getAddressId()
+	public int getAddressId()
 	{
 		return addressID;
 	}
@@ -168,4 +168,15 @@ public class VOMovingViolations implements Comparable<VOMovingViolations>
 		}
 
 	}
+
+	public static class comparadorAddressID implements Comparator<VOMovingViolations>
+	{
+
+		public int compare(VOMovingViolations arg0, VOMovingViolations arg1) 
+		{
+			return arg0.getAddressId() - arg1.getAddressId();
+		}
+
+	}
+	
 }

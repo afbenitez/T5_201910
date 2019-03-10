@@ -71,7 +71,7 @@ public class Sort
 	 */
 	private static boolean less(VOMovingViolations v, VOMovingViolations w)
 	{
-		return comparadorActual.compare(v, w)<0;
+		return comparadorActual.compare(v, w) < 0;
 	}
 
 	/**
