@@ -81,29 +81,29 @@ public class Controller
 			case 0:
 				view.printMessage("Datos de los cuatro meses");
 				int numeroCuatrimestre = 1;
-				controller.loadMovingViolations(numeroCuatrimestre);
+				this.loadMovingViolations(numeroCuatrimestre);
 				break;
 			case 1:
 				view.printMessage("Ingrese el tamaño de la muestra aleatoria");
 				int seleccion=sc.nextInt();
-				controller.darMuestra(seleccion);
+				this.darMuestra(seleccion);
 				break;
 			case 2: 
-				long timeAC = controller.agregarDatosCola(this.muestra);
-				System.out.println("Tiempo de "+ timeAC + "milisegundos para agregar los datos de una cola");
+				long timeAC = this.agregarDatosCola(this.muestra);
+				System.out.println("Tiempo de "+ timeAC + " nanosegundos para agregar los datos de una cola");
 				break;
 
 			case 3: 
-				long timeAH = controller.agregarDatosHeap(this.muestra); 
-				System.out.println("Tiempo de " + timeAH + "milisegundos para agregar los datos de un heap");
+				long timeAH = this.agregarDatosHeap(this.muestra); 
+				System.out.println("Tiempo de " + timeAH + " nanosegundos para agregar los datos de un heap");
 				break;
 			case 4: 
-				long timeEC = controller.eliminarDatosCola();
-				System.out.println("Tiempo de" + timeEC + "milisegundos para eliminar los datos de una cola");
+				long timeEC = this.eliminarDatosCola();
+				System.out.println("Tiempo de " + timeEC + " nanosegundos para eliminar los datos de una cola");
 				break;
 			case 5: 
-				long timeEH = controller.eliminarDatosHeap(); 
-				System.out.println("Tiempo de "+ timeEH + "milisegundos para eliminar los datos de un heap");
+				long timeEH = this.eliminarDatosHeap(); 
+				System.out.println("Tiempo de "+ timeEH + " nanosegundos para eliminar los datos de un heap");
 				break;
 			case 6: 
 				System.out.println("Ingrese la fecha inicial");
@@ -210,58 +210,63 @@ public class Controller
 
 	public long agregarDatosCola(ArregloDinamico<LocationVO> muestra)
 	{
-		
-		long startTime = System.currentTimeMillis();
-
+		long startTime = System.nanoTime();
 
 		for(int i = 0; i < muestra.darTamanio(); i++)
 		{
 			cola.agregar(muestra.darElemento(i)); 
 		}
 		
-		long endTime = System.currentTimeMillis() - startTime;
+		long endTime = System.nanoTime() - startTime;
 		long promedio = endTime/cola.darNumeroElementos();
-		view.printMessage("Promedio agregar cola de prioridad es: "+ promedio);
+		
 		return promedio;
 	}
 	public long eliminarDatosCola()
 	{
-		long startTime = System.currentTimeMillis();
-
+		long startTime = System.nanoTime();
+		int cantidad = cola.darNumeroElementos();
+		
 		for(int i = 0; i < muestra.darTamanio(); i++)
 		{
 			cola.delMax();
 		}
-		long endTime = System.currentTimeMillis() - startTime;
-		long promedio = endTime/cola.darNumeroElementos();
-		view.printMessage("Promedio eliminar cola de prioridad es: "+ promedio);
+		
+		long endTime = System.nanoTime() - startTime;
+		long promedio = endTime/cantidad;
+		
 		return promedio;
 
 	}
 
 	public long agregarDatosHeap(ArregloDinamico<LocationVO> muestra)
 	{
-		long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
+		
 		for(int i = 0; i < muestra.darTamanio(); i++)
 		{
 			heap.agregar(muestra.darElemento(i)); 
 		}
-		long endTime = System.currentTimeMillis() - startTime;
+		
+		long endTime = System.nanoTime() - startTime;
 		long promedio = endTime/ heap.darNumeroElementos();
-		view.printMessage("Promedio agregar heap es: "+ promedio);
+		
 		return promedio;
 	}
 	
 	public long eliminarDatosHeap()
 	{
-		long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
+		int cantidad = heap.darNumeroElementos();
+		
 		for(int i = 0; i< muestra.darTamanio(); i++)
 		{
 			heap.delMax();
 		}
-		long endTime = System.currentTimeMillis() - startTime;
-		long promedio = endTime/heap.darNumeroElementos();
-		view.printMessage("Promedio eliminar heap es: "+ promedio);
+		
+		long endTime = System.nanoTime() - startTime;
+		long promedio = endTime/cantidad;
+		
 		return promedio;
 	}
 	
@@ -278,7 +283,7 @@ public class Controller
 			
 			if(fechaActual.getDayOfMonth() < 10 & fechaActual.getMonthValue() < 10)
 			{
-				fecha = convertirFecha("0"+fechaActual.getDayOfMonth()+""+"/" + "0"+fechaActual.getMonthValue()+"" +"/"+fechaActual.getYear());
+				fecha = convertirFecha(fechaActual.getDayOfMonth()+""+"/" + "0"+fechaActual.getMonthValue()+"" +"/"+fechaActual.getYear());
 			}
 			else if(fechaActual.getDayOfMonth() >= 10 && fechaActual.getMonthValue() < 10)
 			{
