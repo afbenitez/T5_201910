@@ -31,13 +31,13 @@ public class LocationVO implements Comparable<LocationVO>
 	
 	public int compareTo(LocationVO object)
 	{
-		int resta = numberOfRegisters - object.numberOfRegisters;
-		
-		if(resta == 0)
-		{
-			return location.compareTo(object.darLocation());
+		if (this.numberOfRegisters < object.numberOfRegisters)
+			return -1;
+		else if (this.numberOfRegisters > object.numberOfRegisters)
+			return 1;
+		else {
+			return (this.location.compareTo(object.location));
 		}
-		else return resta;
 	}
 
 	
